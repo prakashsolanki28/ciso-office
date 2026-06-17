@@ -1,0 +1,11 @@
+{
+    "name": "Manjulika",
+    "alias": "manjulika",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Manjulika\\Providers\\ManjulikaServiceProvider"
+    ],
+    "files": []
+}

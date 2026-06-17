@@ -1,0 +1,11 @@
+{
+    "name": "SOP",
+    "alias": "sop",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\SOP\\Providers\\SOPServiceProvider"
+    ],
+    "files": []
+}

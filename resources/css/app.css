@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* TipTap editor */
+.tiptap {
+    @apply outline-none;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    @apply text-gray-400 float-left h-0 pointer-events-none;
+}
+
+/* Prose styles for TipTap content (admin + public) */
+.blog-content h1 { @apply text-3xl font-bold mt-8 mb-4; }
+.blog-content h2 { @apply text-2xl font-semibold mt-7 mb-3; }
+.blog-content h3 { @apply text-xl font-semibold mt-6 mb-2; }
+.blog-content p  { @apply text-gray-700 leading-relaxed mb-4; }
+.blog-content ul { @apply list-disc mb-4 space-y-1 pl-6; }
+.blog-content ol { @apply list-decimal mb-4 space-y-1 pl-6; }
+/* TipTap wraps each <li> in a <p>; keep the marker and text on the same line */
+.blog-content li { @apply pl-1; }
+.blog-content li > p { @apply mb-0; }
+.blog-content li > ul, .blog-content li > ol { @apply mb-0 mt-1; }
+.blog-content blockquote {
+    @apply border-l-4 border-primary pl-4 italic text-gray-600 my-6;
+}
+.blog-content code {
+    @apply bg-gray-100 text-sm px-1.5 py-0.5 rounded font-mono;
+}
+.blog-content pre {
+    @apply bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto my-6 text-sm font-mono;
+}
+.blog-content pre code { @apply bg-transparent p-0; }
+.blog-content a { @apply text-blue-600 underline; }
+.blog-content img { @apply max-w-full rounded-lg my-6; }
+.blog-content hr { @apply border-gray-200 my-8; }
+
+/* TipTap toolbar button styles (used in blog/project edit pages) */
+.toolbar-btn {
+    @apply p-1.5 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition cursor-pointer;
+}
+.toolbar-btn-active {
+    @apply p-1.5 rounded bg-primary/10 text-primary;
+}
+
+/* Notion-style selection bubble menu buttons */
+.bubble-btn {
+    @apply flex items-center justify-center w-7 h-7 px-1 rounded text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition cursor-pointer;
+}
+.bubble-btn-active {
+    @apply flex items-center justify-center w-7 h-7 px-1 rounded bg-primary/10 text-primary cursor-pointer;
+}
+
+/* Notion-style "/" slash command menu */
+.slash-menu {
+    @apply fixed z-50 w-72 max-h-80 overflow-y-auto p-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-2xl;
+}
+.slash-item {
+    @apply w-full flex items-center gap-3 px-2.5 py-2 rounded-lg text-left cursor-pointer transition;
+}
+.slash-item:hover,
+.slash-item.is-selected {
+    @apply bg-gray-100 dark:bg-gray-700;
+}
+.slash-item-icon {
+    @apply flex items-center justify-center w-9 h-9 shrink-0 rounded-md border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300;
+}
+.slash-item-icon svg { @apply w-4 h-4; }
+.slash-item-body { @apply flex flex-col min-w-0; }
+.slash-item-title { @apply text-sm font-medium text-gray-800 dark:text-gray-100; }
+.slash-item-desc { @apply text-xs text-gray-400 truncate; }
+.slash-empty { @apply px-3 py-2 text-sm text-gray-400; }
+
+/* Tables (editor + rendered content) */
+.blog-content .tableWrapper,
+.ProseMirror .tableWrapper { @apply my-5 overflow-x-auto; }
+.blog-content table,
+.ProseMirror table {
+    @apply w-full border-collapse table-fixed;
+}
+.blog-content :is(th, td),
+.ProseMirror :is(th, td) {
+    @apply border border-gray-300 dark:border-gray-600 px-3 py-2 align-top relative;
+    min-width: 4rem;
+}
+.blog-content th,
+.ProseMirror th {
+    @apply bg-gray-100 dark:bg-gray-700/60 font-semibold text-left;
+}
+.ProseMirror .selectedCell::after {
+    @apply absolute inset-0 bg-primary/10 pointer-events-none z-10;
+    content: '';
+}
+.ProseMirror .column-resize-handle {
+    @apply absolute top-0 bottom-0 w-1 bg-primary/40 pointer-events-none;
+    right: -2px;
+}
+.ProseMirror.resize-cursor { cursor: col-resize; }
+
+/* Notion-style callout block */
+.blog-content .callout,
+.ProseMirror .callout {
+    @apply relative my-4 pl-11 pr-4 py-3 rounded-lg border border-gray-200 bg-gray-50 dark:bg-gray-800/60 dark:border-gray-700;
+}
+.callout::before {
+    @apply absolute left-3.5 top-3 text-lg leading-6;
+    content: '💡';
+}
+.callout[data-type="warning"] { @apply bg-amber-50 border-amber-200 dark:bg-amber-900/20 dark:border-amber-800; }
+.callout[data-type="warning"]::before { content: '⚠️'; }
+.callout[data-type="success"] { @apply bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800; }
+.callout[data-type="success"]::before { content: '✅'; }
+.callout[data-type="danger"]  { @apply bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800; }
+.callout[data-type="danger"]::before { content: '🛑'; }
+.callout > :first-child { @apply mt-0; }
+.callout > :last-child { @apply mb-0; }
+
+[x-cloak] { display: none !important; }

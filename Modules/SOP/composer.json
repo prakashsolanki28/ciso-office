@@ -1,0 +1,30 @@
+{
+    "name": "CISO Office/sop",
+    "description": "",
+    "authors": [
+        {
+            "name": "CISO Office",
+            "email": "ciso@office.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\SOP\\": "app/",
+            "Modules\\SOP\\Database\\Factories\\": "database/factories/",
+            "Modules\\SOP\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\SOP\\Tests\\": "tests/"
+        }
+    }
+}

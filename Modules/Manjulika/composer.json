@@ -1,0 +1,30 @@
+{
+    "name": "CISO Office/manjulika",
+    "description": "",
+    "authors": [
+        {
+            "name": "CISO Office",
+            "email": "ciso@office.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Manjulika\\": "app/",
+            "Modules\\Manjulika\\Database\\Factories\\": "database/factories/",
+            "Modules\\Manjulika\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Manjulika\\Tests\\": "tests/"
+        }
+    }
+}

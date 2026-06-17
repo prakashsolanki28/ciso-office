@@ -1,0 +1,30 @@
+{
+    "name": "CISO Office/casestudy",
+    "description": "",
+    "authors": [
+        {
+            "name": "CISO Office",
+            "email": "ciso@office.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\CaseStudy\\": "app/",
+            "Modules\\CaseStudy\\Database\\Factories\\": "database/factories/",
+            "Modules\\CaseStudy\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\CaseStudy\\Tests\\": "tests/"
+        }
+    }
+}

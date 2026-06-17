@@ -1,0 +1,30 @@
+{
+    "name": "CISO Office/quiz",
+    "description": "",
+    "authors": [
+        {
+            "name": "CISO Office",
+            "email": "ciso@office.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Quiz\\": "app/",
+            "Modules\\Quiz\\Database\\Factories\\": "database/factories/",
+            "Modules\\Quiz\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Quiz\\Tests\\": "tests/"
+        }
+    }
+}

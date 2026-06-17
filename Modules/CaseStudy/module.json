@@ -1,0 +1,11 @@
+{
+    "name": "CaseStudy",
+    "alias": "casestudy",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CaseStudy\\Providers\\CaseStudyServiceProvider"
+    ],
+    "files": []
+}
