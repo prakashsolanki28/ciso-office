@@ -27,6 +27,7 @@ class UpdateProjectRequest extends FormRequest
             'onboard_accounts'  => ['nullable', 'string'],
             'gallery'           => ['nullable', 'string'],
             'charts'            => ['nullable', 'string'],
+            'section_order'     => ['nullable', 'string'],
         ];
     }
 }

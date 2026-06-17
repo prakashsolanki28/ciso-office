@@ -311,8 +311,9 @@
                         </div>
                         <div
                             class="chat-md bg-white border border-gray-200 rounded-2xl rounded-bl-sm px-4 py-3 text-sm text-on-surface max-w-[82%] shadow-sm">
-                            Hi! I'm <strong>Cyber Dost</strong> — the Cyber Safety Assistant from HRRL CISO Office. If
-                            you've been hit by any cyber fraud or online scam, I'm here to help. What happened?
+                            Hi! I'm <strong>Cyber Dost</strong> — the Cyber Safety Assistant from HRRL CISO Office.
+                            What's your name? You can also just tell me what happened — like an online scam or a hacked
+                            account.
                         </div>
                     </div>
                 </div>

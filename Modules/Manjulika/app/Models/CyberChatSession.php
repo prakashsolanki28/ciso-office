@@ -9,6 +9,7 @@ class CyberChatSession extends Model
 {
     protected $fillable = [
         'session_id',
+        'name',
         'browser_fingerprint',
         'ip_address',
         'user_agent',
@@ -22,6 +23,11 @@ class CyberChatSession extends Model
     public function messages(): HasMany
     {
         return $this->hasMany(CyberChatMessage::class, 'chat_session_id')->orderBy('id');
+    }
+
+    public function getDisplayNameAttribute(): string
+    {
+        return $this->name ?: 'Anonymous';
     }
 
     public function historyArray(): array

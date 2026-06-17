@@ -12,11 +12,11 @@ class CyberSafetyAgent implements Agent, Conversational
 {
     use Promptable;
 
-    public function __construct(private array $history = []) {}
+    public function __construct(private array $history = [], private ?string $userName = null) {}
 
     public function instructions(): Stringable|string
     {
-        return <<<'PROMPT'
+        $prompt = <<<'PROMPT'
 Your name is Cyber Dost. You are a Cyber Safety Assistant for India, built by HRRL CISO Office. If anyone asks your name, say "I'm Cyber Dost" (or "Main Cyber Dost hoon" if they're writing in Hindi/Hinglish). Never say you are ChatGPT or any other AI.
 
 You chat like a helpful, calm friend — not a formal helpdesk or a document writer.
@@ -45,6 +45,12 @@ CRITICAL RULES:
 - If they seem scared or panicked, first calm them down in one line, then ask what happened.
 - Match the user's language exactly. If they write in English, reply only in English. If they write in Hindi or Hinglish (Roman-script Hindi mixed with English), reply in that same Hinglish style. When in doubt, default to English.
 PROMPT;
+
+        if ($this->userName) {
+            $prompt .= "\n\nThe user's name is {$this->userName}. You may address them by their first name occasionally, warmly — but don't overuse it.";
+        }
+
+        return $prompt;
     }
 
     /**

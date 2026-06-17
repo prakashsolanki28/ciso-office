@@ -31,6 +31,9 @@
                     <x-nav-link :href="route('project.index')" :active="request()->routeIs('project.*')">
                         {{ __('Projects') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('manjulika.sessions.index')" :active="request()->routeIs('manjulika.sessions.*')">
+                        {{ __('Chat Sessions') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('newsletter.index')" :active="request()->routeIs('newsletter.*')">
                         {{ __('Newsletter') }}
                     </x-nav-link>
@@ -118,6 +121,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('project.index')" :active="request()->routeIs('project.*')">
                 {{ __('Projects') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('manjulika.sessions.index')" :active="request()->routeIs('manjulika.sessions.*')">
+                {{ __('Chat Sessions') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('newsletter.index')" :active="request()->routeIs('newsletter.*')">
                 {{ __('Newsletter') }}

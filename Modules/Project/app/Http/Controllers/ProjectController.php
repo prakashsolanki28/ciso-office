@@ -114,6 +114,22 @@ class ProjectController extends Controller
             }
         }
 
+        // Section order — keep only known section keys, dedupe, then append any
+        // known keys missing from the submitted order so every section always
+        // has a place. Falls back to null (= model default order) when absent.
+        $sectionOrder = null;
+        if ($request->filled('section_order')) {
+            $decoded = json_decode($request->section_order, true);
+            if (is_array($decoded)) {
+                $known = array_keys(Project::SECTIONS);
+                $clean = array_values(array_unique(array_filter(
+                    $decoded,
+                    fn($k) => in_array($k, $known, true)
+                )));
+                $sectionOrder = array_values(array_unique([...$clean, ...$known]));
+            }
+        }
+
         $data = [
             'name'              => $request->name,
             'slug'              => $request->slug ?: $project->slug,
@@ -129,6 +145,7 @@ class ProjectController extends Controller
                 'caption' => trim($g['caption'] ?? ''),
             ], 'image'),
             'charts'            => $charts,
+            'section_order'     => $sectionOrder,
         ];
 
         if ($request->hasFile('banner')) {

@@ -955,6 +955,49 @@
                     </div>
                     {{-- ── Sidebar ── --}}
                     <div class="w-72 shrink-0 space-y-4 sticky top-6">
+                        {{-- Section Order --}}
+                        @php
+                            $orderedSections = collect($project->orderedSections())
+                                ->map(fn($k) => ['key' => $k, 'label' => \Modules\Project\Models\Project::SECTIONS[$k]])
+                                ->all();
+                        @endphp
+                        <div x-data="sectionOrderManager({{ Js::from($orderedSections) }})"
+                            class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                            <div class="p-4 border-b border-gray-100 dark:border-gray-700">
+                                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300">Section Order</h3>
+                                <p class="text-xs text-gray-400 mt-0.5">Order sections appear on the public page.</p>
+                            </div>
+
+                            <input type="hidden" name="section_order" :value="JSON.stringify(sections.map(s => s.key))">
+
+                            <ul class="divide-y divide-gray-100 dark:divide-gray-700/50">
+                                <template x-for="(section, i) in sections" :key="section.key">
+                                    <li class="flex items-center gap-2 px-3 py-2">
+                                        <span class="w-4 shrink-0 text-xs text-gray-300 tabular-nums text-right"
+                                            x-text="i + 1"></span>
+                                        <span class="flex-1 min-w-0 text-sm text-gray-600 dark:text-gray-300 truncate"
+                                            x-text="section.label"></span>
+                                        <span class="flex items-center gap-0.5 shrink-0">
+                                            <button type="button" @click="moveUp(i)" :disabled="i === 0"
+                                                title="Move up"
+                                                class="p-1 rounded text-gray-400 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-700 transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-gray-400 disabled:cursor-not-allowed">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                                </svg>
+                                            </button>
+                                            <button type="button" @click="moveDown(i)" :disabled="i === sections.length - 1"
+                                                title="Move down"
+                                                class="p-1 rounded text-gray-400 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-700 transition disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-gray-400 disabled:cursor-not-allowed">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            </button>
+                                        </span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+
                         {{-- Save Card --}}
                         <div
                             class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
@@ -1264,6 +1307,25 @@
 
             remove(index) {
                 this.items.splice(index, 1);
+            },
+        }));
+
+        // Section order — reorder the public-page sections via up/down buttons.
+        // Splice-based move keeps Alpine's array reactivity intact.
+        Alpine.data('sectionOrderManager', (initial) => ({
+            sections: Array.isArray(initial) ? initial : [],
+
+            move(from, to) {
+                const [item] = this.sections.splice(from, 1);
+                this.sections.splice(to, 0, item);
+            },
+
+            moveUp(i) {
+                if (i > 0) this.move(i, i - 1);
+            },
+
+            moveDown(i) {
+                if (i < this.sections.length - 1) this.move(i, i + 1);
             },
         }));
     });
